@@ -16,7 +16,7 @@ Projeto web services com Spring Boot e JPA / Hibernate
 
 ### _MODELO DE DOMÍNIO_
 
-![Domain Model]()
+<img src="./domain model.png"/>
 
 ### _FERRAMENTS_
 
