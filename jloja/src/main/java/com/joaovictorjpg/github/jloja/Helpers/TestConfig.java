@@ -1,4 +1,4 @@
-package com.joaovictorjpg.github.jloja.model.Helpers;
+package com.joaovictorjpg.github.jloja.Helpers;
 
 import com.joaovictorjpg.github.jloja.model.entities.User;
 import com.joaovictorjpg.github.jloja.model.repositories.UserRepository;
