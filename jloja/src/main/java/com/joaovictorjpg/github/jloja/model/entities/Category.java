@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
+
 @Entity
 @Table(name = "tb_category")
 public class Category implements Serializable {
@@ -13,6 +15,9 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long ind;
+
+    @Transient
+    private Set<Product> products;
     private String name;
 
     public Category() {
