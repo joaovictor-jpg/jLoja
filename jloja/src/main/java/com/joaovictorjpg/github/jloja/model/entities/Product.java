@@ -3,6 +3,7 @@ package com.joaovictorjpg.github.jloja.model.entities;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -20,8 +21,9 @@ public class Product implements Serializable {
     private Double price;
     private String imgUrl;
 
-    @Transient
-    private Set<Category> categories;
+    @ManyToMany
+    @JoinTable(name = "tb_ptoduct_category", joinColumns = @JoinColumn(name = "producto_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories = new HashSet<>();
 
     public Product() {
     }
@@ -72,6 +74,10 @@ public class Product implements Serializable {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
     }
 
     @Override
