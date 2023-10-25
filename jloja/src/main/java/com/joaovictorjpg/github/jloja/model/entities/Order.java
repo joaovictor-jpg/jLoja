@@ -1,5 +1,6 @@
 package com.joaovictorjpg.github.jloja.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.joaovictorjpg.github.jloja.model.entities.enums.OrderStatus;
 import jakarta.persistence.*;
 
@@ -19,6 +20,7 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant date;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
     private Integer status;
     @ManyToOne
     @JoinColumn(name = "client_id")
