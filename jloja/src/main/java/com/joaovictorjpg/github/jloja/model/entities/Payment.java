@@ -1,5 +1,6 @@
 package com.joaovictorjpg.github.jloja.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.Instant;
@@ -12,6 +13,7 @@ public class Payment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Instant moment;
+    @JsonIgnore
     @OneToOne
     @MapsId
     private Order order;
