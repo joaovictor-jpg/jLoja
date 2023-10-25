@@ -1,5 +1,6 @@
 package com.joaovictorjpg.github.jloja.model.services;
 
+import com.joaovictorjpg.github.jloja.Helpers.Utils;
 import com.joaovictorjpg.github.jloja.model.entities.User;
 import com.joaovictorjpg.github.jloja.model.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,12 @@ public class UserService {
 
     public void delete(Long id) {
         repository.deleteById(id);
+    }
+
+    public User update(Long id, User user) {
+        User userBanco = repository.getReferenceById(id);
+        Utils.copyNonNullProperties(user, userBanco);
+        return repository.save(userBanco);
     }
 
 }
