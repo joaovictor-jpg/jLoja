@@ -23,7 +23,8 @@ public class Order implements Serializable {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private User client;
-
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> orders = new HashSet<>();
 
@@ -71,6 +72,14 @@ public class Order implements Serializable {
 
     public Set<OrderItem> getOrders() {
         return orders;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
     }
 
     @Override
