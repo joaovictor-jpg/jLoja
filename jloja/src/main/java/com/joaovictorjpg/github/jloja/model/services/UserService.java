@@ -3,8 +3,11 @@ package com.joaovictorjpg.github.jloja.model.services;
 import com.joaovictorjpg.github.jloja.Helpers.Utils;
 import com.joaovictorjpg.github.jloja.model.entities.User;
 import com.joaovictorjpg.github.jloja.model.repositories.UserRepository;
+import com.joaovictorjpg.github.jloja.model.services.exceptionServices.AutoFillException;
 import com.joaovictorjpg.github.jloja.model.services.exceptionServices.DatabaseException;
 import com.joaovictorjpg.github.jloja.model.services.exceptionServices.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
+import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -45,9 +48,15 @@ public class UserService {
     }
 
     public User update(Long id, User user) {
-        User userBanco = repository.getReferenceById(id);
-        Utils.copyNonNullProperties(user, userBanco);
-        return repository.save(userBanco);
+        try {
+            User userBanco = repository.getReferenceById(id);
+            Utils.copyNonNullProperties(user, userBanco);
+            return repository.save(userBanco);
+        } catch (FatalBeanException e) {
+            throw new AutoFillException(e.getMessage());
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException(id);
+        }
     }
 
 }
