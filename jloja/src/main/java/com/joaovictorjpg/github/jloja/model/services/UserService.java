@@ -1,5 +1,6 @@
 package com.joaovictorjpg.github.jloja.model.services;
 
+import com.joaovictorjpg.github.jloja.Helpers.Bcrypt;
 import com.joaovictorjpg.github.jloja.Helpers.Utils;
 import com.joaovictorjpg.github.jloja.model.entities.User;
 import com.joaovictorjpg.github.jloja.model.repositories.UserRepository;
@@ -33,6 +34,7 @@ public class UserService {
     }
 
     public User insert(User user) {
+        user.setPassword(Bcrypt.brycptPassword(user.getPassword()));
         return repository.save(user);
     }
 
