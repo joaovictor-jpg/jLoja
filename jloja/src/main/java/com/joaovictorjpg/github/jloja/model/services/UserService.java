@@ -61,4 +61,8 @@ public class UserService {
         }
     }
 
+    public User findByName(String name) {
+        return repository.findByName(name);
+    }
+
 }
